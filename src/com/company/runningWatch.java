@@ -1,6 +1,6 @@
 package com.company;
 
-public class runningWatch extends Product{
+public class RunningWatch extends Product{
 
     private String os;
     private double batteryLife;
@@ -8,7 +8,7 @@ public class runningWatch extends Product{
 
     //i added the profit, battery life, and OS as parameters
     //these are passed to the superclass constructor
-    public runningWatch(int id, String n, double p, String b, String os, double batteryLife, double profit){
+    public RunningWatch(int id, String n, double p, String b, String os, double batteryLife, double profit){
         super(id, n, p, b);
         this.os = os;
         this.batteryLife = batteryLife;

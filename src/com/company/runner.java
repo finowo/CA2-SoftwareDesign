@@ -3,13 +3,13 @@ package com.company;
 
 //runner "is-a" product
 //runner inherits id, name, price, and brand from product
-public class runner extends Product{
+public class Runner extends Product{
     private double healToeOffset;
     private double weight;
     private double profit;
 
 
-    public runner(String n, double p, String b, double healToeOffset, double weight, double profit) {
+    public Runner(String n, double p, String b, double healToeOffset, double weight, double profit) {
         //calling the superclass constructor; product
         //this constructor expects id, name, price, and brand
         //we don't have an id yet we pass in -1
@@ -19,7 +19,7 @@ public class runner extends Product{
         this.profit = profit;
     }
 
-    public runner(int id, String n, double p, String b, double healToeOffset, double weight, double profit) {
+    public Runner(int id, String n, double p, String b, double healToeOffset, double weight, double profit) {
         super(id, n, p, b);
         this.healToeOffset = healToeOffset;
         this.weight = weight;
@@ -30,7 +30,7 @@ public class runner extends Product{
 
     }
 
-    public runner(int id, String n, double p, String b) {
+    public Runner(int id, String n, double p, String b) {
         super(id, n, p, b);
     }
 
