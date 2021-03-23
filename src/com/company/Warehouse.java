@@ -10,12 +10,17 @@ public class Warehouse {
 
     private List<Product> productList;
 
+    public Warehouse(String location, int orderNumber){
+        this.location = location;
+        this.orderNumber = orderNumber;
+    }
+
     public Warehouse(int id, String location, int orderNumber){
-        this.warehouseId = id;
+        this.warehouseId = id ;
         this.location = location;
         this.orderNumber = orderNumber;
 
-        productList = new ArrayList<>();
+        productList = new ArrayList();
     }
 
     public void addProductToWarehouse(Product p){productList.add(p);}

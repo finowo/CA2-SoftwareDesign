@@ -1,6 +1,5 @@
 package com.company;
 
-
 //runner "is-a" product
 //runner inherits id, name, price, and brand from product
 public class Runner extends Product{
@@ -9,11 +8,11 @@ public class Runner extends Product{
     private double profit;
 
 
-    public Runner(String n, double p, String b, double healToeOffset, double weight, double profit) {
+    public Runner(String n, double p, String b, double healToeOffset, double weight, double profit, int wId) {
         //calling the superclass constructor; product
         //this constructor expects id, name, price, and brand
         //we don't have an id yet we pass in -1
-        super(-1, n, p, b);
+        super(-1, n, p, b, wId);
         this.healToeOffset = healToeOffset;
         this.weight = weight;
         this.profit = profit;
@@ -24,14 +23,23 @@ public class Runner extends Product{
         this.healToeOffset = healToeOffset;
         this.weight = weight;
         this.profit = profit;
-
         //call to superclass constructor must be the first line in subclass constructor
         //super(id, n, p, b); don't have to call to the super class after the other assignments
+    }
 
+    public Runner(int id, String n, double p, String b, double healToeOffset, double weight, double profit, int warehouseId) {
+        super(id, n, p, b, warehouseId);
+        this.healToeOffset = healToeOffset;
+        this.weight = weight;
+        this.profit = profit;
     }
 
     public Runner(int id, String n, double p, String b) {
         super(id, n, p, b);
+    }
+
+    public Runner() {
+        super();
     }
 
 

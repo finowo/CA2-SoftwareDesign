@@ -11,12 +11,24 @@ public abstract class Product implements Reports {
     private double price;
     private String brand;
 
+    private int warehouseID;
 
     public Product(int id, String n, double p, String b) {
         this.id = id;
         this.name = n;
         this.price = p;
         this.brand = b;
+    }
+
+    public Product(int id, String n, double p, String b, int warehouseID) {
+        this.id = id;
+        this.name = n;
+        this.price = p;
+        this.brand = b;
+        this.warehouseID = warehouseID;
+    }
+
+    public Product() {
 
     }
 
@@ -56,6 +68,10 @@ public abstract class Product implements Reports {
         this.brand = brand;
     }
 
+    public int getWarehouseID() {   return warehouseID; }
+
+    public void setWarehouseID(int warehouseID) { this.warehouseID = warehouseID;   }
+
 
     @Override
     //this method will return the brand name and the product name of the specific item
@@ -64,6 +80,4 @@ public abstract class Product implements Reports {
     {
         return "Name : " + getBrand() + getName();
     }
-
-
 }

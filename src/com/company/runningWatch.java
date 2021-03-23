@@ -56,5 +56,11 @@ public class RunningWatch extends Product{
         this.profit = profit;
     }
 
+    @Override
+    public String toString() {
+        return
+                "\n\nRunning Watch " + super.toString() + "\nProfit : " + profit;
+    }
+
 }
 
