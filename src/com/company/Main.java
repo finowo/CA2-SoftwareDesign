@@ -1,10 +1,9 @@
-package src.com.company.database;
+package com.company;
 
-import src.Model;
-import src.Product;
-import src.Warehouse;
-import src.com.company.database.utils.Input;
-import com.mysql.cj.log.Log;
+import com.company.Model;
+import com.company.Product;
+import com.company.Warehouse;
+import com.company.utils.Input;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,13 +33,13 @@ public class Main {
             System.out.println("7. Create new Warehouse");
             System.out.println("8. Assign Product to existing Warehouse");
 
-
             System.out.println("9. Exit");
-            System.out.println("*********** Cya! ************");
+            System.out.println("*********** MENU ************");
             System.out.println();
 
             System.out.print("Enter option: ");
             String line = keyboard.nextLine();
+            System.out.println(line);
             opt = Integer.parseInt(line);
 
             /*****Deciding Which Option The User Chooses *****/
@@ -68,7 +67,7 @@ public class Main {
                 }
 
                 case 5: {
-                    viewWarehousebyId();
+                    viewWarehouseById();
                     break;
                 }
                 case 6: {
@@ -81,7 +80,7 @@ public class Main {
                 }
 
                 case 8: {
-                    System.out.println("idfk how im supposed to do this");
+//                    System.out.println("idfk how im supposed to do this");
                     break;
                 }
 
@@ -105,22 +104,21 @@ public class Main {
             case 1:
             {
 
-                product = Input.readRunner();
-                int generatedId = model.createProduct(product);
+                Product = Input.readRunner();
+                int generatedId = model.createProduct(Product);
                 System.out.println("Product created with ID "+ generatedId);
                 break;
             }
             case 2:
             {
-                product = Input.readRunningWatch();
-                int generatedId = model.createProduct(product);
+                Product = Input.readRunningWatch();
+                int generatedId = model.createProduct(Product);
                 System.out.println("Product created with ID "+ generatedId);
                 break;
             }
 
 
         }
-        model.createProduct(product);
     }
 
 
@@ -157,7 +155,7 @@ public class Main {
             System.out.println("Oopsie Poopsie Something went Wrong :(");
     }
 
-    private static void viewWarehousebyId() {
+    private static void viewWarehouseById() {
         System.out.println("Enter the ID for the Warehouse");
         int id = keyboard.nextInt();
         Warehouse w = null;
@@ -165,27 +163,27 @@ public class Main {
         keyboard.nextLine();
 
         System.out.println("Do you also want to view the product for that Warehouse? (y/n)");
-        if (keyboard.nextLine().equalsIgnoreCase("y"))
-            w = model.viewWarehouse(id);
-        else
+        if (keyboard.nextLine().equalsIgnoreCase("y")){
+            w = model.viewWarehouseWithProducts(id);
+        } else{
             System.out.println("Can you write the code that just gets manager with ID but no staff");
-
         //if you choose n, this print statement will try print a null pointer
         System.out.println("************ PRINTING MANAGER DETAILS ************\n\n" + w.toString());
+        }
     }
-
 
     private static void viewProduct() {
         List<Product> productList = model.viewProduct();
-        for (Product product : ProductList) {
-            System.out.println("Name: " + Product.toString());
+        for (Product product : productList) {
+            System.out.println("Name: " + product.toString());
         }
     }
 
     private static void viewWarehouse() {
-        List<Warehouse> warehouseList = model.viewWarehouse();
-        for (Warehouse warehouse : WarehouseList) {
-            System.out.println("Name: " + Warehouse.toString());
-        }
+        System.out.println("Enter the ID for the Warehouse");
+        int b = keyboard.nextInt();
+        Warehouse w = model.viewWarehouse(b);
+        System.out.println("Name: " + w.toString());
+        keyboard.nextLine();
     }
 }

@@ -1,8 +1,8 @@
 package com.company;
 
-import src.com.company.database.DBConnection;
-import src.com.company.database.WarehouseTableGateway;
-import src.com.company.database.ProductTableGateway;
+import com.company.database.DBConnection;
+import com.company.database.WarehouseTableGateway;
+import com.company.database.ProductTableGateway;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 
 public class Model {
-
     private static Model instance = null;
 
     public static synchronized Model getInstance() {
@@ -24,15 +23,16 @@ public class Model {
 
 
     private List<Product> productList;
-    private ProductTableGateway sGateway;
-    private WarehouseTableGateway mGateway;
+    private List<Warehouse> warehouseList;
+    private ProductTableGateway pGateway;
+    private WarehouseTableGateway wGateway;
 
 
     private Model() {
         try {
             Connection conn = DBConnection.getInstance();
-            this.sGateway = new ProductTableGateway(conn);
-            this.mGateway = new WarehouseTableGateway(conn);
+            this.pGateway = new ProductTableGateway(conn);
+            this.wGateway = new WarehouseTableGateway(conn);
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,39 +42,37 @@ public class Model {
     }
 
     public List viewProduct() {
-        this.productList = this.sGateway.getProduct();
+        this.productList = this.pGateway.getProduct();
         return productList;
     }
 
-    public List viewWarehouse() {
-        this.warehouseList = this.mGateway.getWarehouse();
-        return warehouseList;
-    }
-
-    //gets a warehouse using an ID from the database then gets all that warehouse's products
     public Warehouse viewWarehouse(int id) {
-        Warehouse m = mGateway.getWarehouse(id);
-        m.setProductList(this.sGateway.getProductByWarehouseId(id));
-        return m;
+        Warehouse w = this.wGateway.getWarehouse(id);
+        return w;
     }
 
-    public boolean createWarehouse(Warehouse m) {
-        //boolean inserted = mGateway.insertWarehouse(m);
-        //return inserted;
-        return (mGateway.insertWarehouse(m));
+    public Warehouse viewWarehouseWithProducts(int id){
+        Warehouse w = wGateway.getWarehouse(id);
+        w.setProductList(this.pGateway.getProductByStoreId(id));
+        return w;
+    }
+
+    public boolean createWarehouse(Warehouse w) {
+        //boolean inserted = mGateway.insertWarehouse(m); return inserted;
+        return (wGateway.insertWarehouse(w));
     }
 
     public int createProduct(Product Product) {
-        int createdId = this.sGateway.createProduct(Product);
-        return createdId;
+       int createdId = this.pGateway.addProduct(Product);
+       return createdId;
     }
 
     public boolean editProduct(int id, double price) {
-        return (sGateway.editProduct(id, price));
+        return (pGateway.editProduct(id, price));
     }
 
     public boolean deleteProduct(int id)
     {
-        return (sGateway.deleteProduct(id));
+        return (pGateway.deleteProduct(id));
     }
 }

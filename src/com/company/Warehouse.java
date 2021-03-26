@@ -51,21 +51,18 @@ public class Warehouse {
         this.orderNumber = orderNumber;
     }
 
-    public List <Product> getProductList() { return productList; }
+    public List<Product> getProductList() { return productList; }
 
-    public void  setProductList(List <Product> productList){
+    public void setProductList(List<Product> productList){
         this.productList = productList;
     }
 
     @Override
     public String toString() {
-        return "Warehouse Details " +
-                "Warehouse Id : " + warehouseId +
-                ", Location : '" + location + '\'' +
-                ", Order Number : " + orderNumber +
-                "\n LIST OF PRODUCTS "
-                + productList +
-                '}';
+        return "Warehouse Details " + "\n" +
+                "Warehouse Id: " + warehouseId +
+                ", Location: " + location +
+                ", Order Number: " + orderNumber;
     }
 
 }

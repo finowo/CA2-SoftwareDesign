@@ -2,6 +2,7 @@ package com.company.utils;
 
 import java.util.Scanner;
 
+import com.company.RunningWatch;
 import com.company.Warehouse;
 import com.company.Runner;
 
@@ -27,30 +28,30 @@ public class Input {
         brand = keyboard.nextLine();
 
         System.out.print("Enter price: ");
-        price = keyboard.nextLine();
+        price = keyboard.nextDouble();
 
         System.out.print("Enter heal toe offset: ");
-        healToeOffset = keyboard.nextLine();
+        healToeOffset = keyboard.nextDouble();
 
         System.out.print("Enter weight: ");
-        weight = keyboard.nextLine();
+        weight = keyboard.nextDouble();
 
         System.out.print("Enter profit: ");
-        profit = keyboard.nextLine();
+        profit = keyboard.nextDouble();
         keyboard.nextLine();
 
         //Asking for the warehouse ID - this needs to exist in the db
         System.out.print("Enter Warehouse ID : ");
-        mId = keyboard.nextInt();
+        wId = keyboard.nextInt();
         keyboard.nextLine();
 
         // Create the Runner object r
         Runner r =
-                new Runner(name, brand, price, healToeOffset, weight, profit, wId);
+                new Runner(name, price, brand, healToeOffset, weight, profit, wId);
         return r;
     }
 
-    public static Runner readRunningWatch() {
+    public static RunningWatch readRunningWatch() {
 
         String name, brand, os;
         double price, batteryLife, profit;
@@ -67,27 +68,28 @@ public class Input {
         brand = keyboard.nextLine();
 
         System.out.print("Enter price: ");
-        price = keyboard.nextLine();
+        price = keyboard.nextDouble();
 
         System.out.print("Enter operating system: ");
         os = keyboard.nextLine();
 
+        keyboard.nextLine();
         System.out.print("Enter battery life: ");
-        batteryLife = keyboard.nextLine();
+        batteryLife = keyboard.nextDouble();
 
         System.out.print("Enter profit: ");
-        profit = keyboard.nextLine();
+        profit = keyboard.nextDouble();
         keyboard.nextLine();
 
         //Asking for the warehouse ID - this needs to exist in the db
         System.out.print("Enter Warehouse ID : ");
-        mId = keyboard.nextInt();
+        wId = keyboard.nextInt();
         keyboard.nextLine();
 
 
-        // Create the Runner object r
+        // Create the Running watch object r
         RunningWatch rw =
-                new RunningWatch(name, brand, price, os, batteryLife, profit, wId);
+                new RunningWatch(name, price, brand, os, batteryLife, profit, wId);
         return rw;
     }
 
@@ -98,10 +100,10 @@ public class Input {
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("Enter warehouse location: ");
-        name = keyboard.nextLine();
+        location = keyboard.nextLine();
 
         System.out.println("Enter warehouse order number: ");
-        office = keyboard.nextInt();
+        orderNumber = keyboard.nextInt();
         keyboard.nextLine();
 
         return (new Warehouse(location, orderNumber));

@@ -1,13 +1,15 @@
 package com.company.database;
 
+import com.company.Product;
 import com.company.Warehouse;
 
 import java.sql.*;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WarehouseTableGateway {
 
-    private static final String TABLE_NAME = "manager";
+    private static final String TABLE_NAME = "warehouse";
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_LOCATION = "location";
     private static final String COLUMN_ORDER_NUMBER = "orderNumber";
@@ -28,7 +30,7 @@ public class WarehouseTableGateway {
         //the java.sql.ResultSet representing the result of SQL query
         ResultSet rs;
         //the java.util.List containing the Programmer objects created for each row
-        List<warehouse> warehouseList;
+        List<Warehouse> warehouseList;
 
         String location;
         int id, orderNumber;
@@ -49,7 +51,7 @@ public class WarehouseTableGateway {
         return warehouseList;
     }
 
-    // Get Manager by ID
+    // Get warehouse by ID
     public Warehouse getWarehouse(int id)  {
         //the SQL query to execute
         String query;
@@ -59,7 +61,7 @@ public class WarehouseTableGateway {
         ResultSet rs;
 
         String location;
-        int whId, orderNumber;
+        int wId, orderNumber;
 
         //a Programmer object created from a row in the result of the query
         Warehouse w = null;
@@ -92,8 +94,9 @@ public class WarehouseTableGateway {
         return w;
     }
 
+
     //Called from the Model when the user wants to create a new Runner in the database
-    public boolean insertWarehouse(Manager w)  {
+    public boolean insertWarehouse(Warehouse w)  {
         //the SQL query to execute
         String query;
         //the java.sql.PreparedStatement object used to execute the SQL query
@@ -101,12 +104,10 @@ public class WarehouseTableGateway {
 
         int numRowsAffected;
 
-
         //the required SQL INSERT statement with place holders for the values to be inserted into the database
         query = "INSERT INTO " + TABLE_NAME + " (" +
                 COLUMN_LOCATION + ", " +
                 COLUMN_ORDER_NUMBER +
-
                 ") VALUES (?, ?)";
 
         try {
@@ -119,22 +120,11 @@ public class WarehouseTableGateway {
             numRowsAffected = stmt.executeUpdate();
 
             if (numRowsAffected == 1) {
-                    //if one row was inserted, retrieve the id that was assigned to that row in the database and ret
-                    //ResultSet keys = stmt.getGeneratedKeys();
-                    //keys.next();
-
-                    //try getting the ID that is returned here and send it back to the user
-                    //id = keys.getInt(1);
                 return true;
             }
-
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("Enter a proper error message here");
         }
-
         return false;
     }
-
 }

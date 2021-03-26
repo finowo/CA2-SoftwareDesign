@@ -10,7 +10,6 @@ public abstract class Product implements Reports {
     private String name;
     private double price;
     private String brand;
-
     private int warehouseID;
 
     public Product(int id, String n, double p, String b) {
@@ -28,13 +27,15 @@ public abstract class Product implements Reports {
         this.warehouseID = warehouseID;
     }
 
-    public Product() {
 
+    public Product(){
     }
 
 
     //defining the calcProfit method - this will force any subclass to implement it
     public abstract double calcProfit();
+
+    public abstract double getProfit();
 
     public int getId() {
         return id;
@@ -70,14 +71,18 @@ public abstract class Product implements Reports {
 
     public int getWarehouseID() {   return warehouseID; }
 
-    public void setWarehouseID(int warehouseID) { this.warehouseID = warehouseID;   }
-
+    public void setWarehouseID(int warehouseID) { this.warehouseID = warehouseID;  }
 
     @Override
     //this method will return the brand name and the product name of the specific item
     //this @override always returns a string
     public String toString()
     {
-        return "Name : " + getBrand() + getName();
+        return "ID: " + id + '\n' +
+                "Product Name: " + name + '\n' +
+                "Price: " + price + '\n' +
+                "Brand: " + brand + '\n';
     }
+
+
 }

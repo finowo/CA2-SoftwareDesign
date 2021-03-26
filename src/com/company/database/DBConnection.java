@@ -18,7 +18,7 @@ public class DBConnection {
 
         if (sConnection == null || sConnection.isClosed()) {
             String url = "jdbc:mysql://" + host + "/" + db;
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             sConnection = DriverManager.getConnection(url, user, password);
         }
 
