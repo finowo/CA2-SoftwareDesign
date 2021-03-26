@@ -12,7 +12,7 @@ public class DBConnection {
         String host, db, user, password;
 
         host = "localhost";
-        db = "RunningStore";
+        db = "runningstore";
         user = "root";
         password = "";
 

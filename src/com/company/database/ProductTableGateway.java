@@ -37,7 +37,7 @@ public class ProductTableGateway {
         mConnection = connection;
     }
 
-    public List<SoftwareStaff> getSoftwareStaff()  {
+    public List<Product> getProduct()  {
         //the SQL query to execute
         String query;
         //the java.sql.Statement object used to execute the SQL query
@@ -89,6 +89,50 @@ public class ProductTableGateway {
             System.out.println("ProductTableGateway Line 56: " + ex);
         }
         return productList;
+    }
+
+    public boolean editProduct(int id, double price)  {
+
+        String query;
+        PreparedStatement stmt;
+        int numRowsAffected;
+
+        query = "UPDATE " + TABLE_NAME + " SET " + COLUMN_PRICE + " = " + price + " WHERE " + COLUMN_ID + "= ?";
+
+        try {
+            stmt = mConnection.prepareStatement(query);
+            stmt.setInt(1, id);
+            System.out.println("\n\nTHE SQL LOOKS LIKE THIS " + stmt.toString() + "\n\n");
+            numRowsAffected = stmt.executeUpdate();
+            if (numRowsAffected == 1) {
+                return true;
+            }
+        }
+        catch (SQLException e)
+        {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, "SQL Exception in productTableGateway : editProduct(), Check the SQL you have created to see where your error is", e);
+        }
+        return false;
+    }
+
+    public boolean deleteProduct(int id)    {
+        int numRowsAffected;
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + "= ?";
+        try {
+            PreparedStatement stmt;
+            stmt = mConnection.prepareStatement(query);
+            stmt.setInt(1, id);
+            System.out.println("\n\nTHE SQL LOOKS LIKE THIS " + stmt.toString() + "\n\n");
+            numRowsAffected = stmt.executeUpdate();
+            if (numRowsAffected == 1) {
+                return true;
+            }
+        }
+        catch (SQLException e)
+        {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, "SQL Exception in productTableGateway : deleteProduct(), Check the SQL you have created to see where your error is", e);
+        }
+        return false;
     }
 
 }

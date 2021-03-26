@@ -1,8 +1,8 @@
 package com.company;
 
-import com.company.database.DBConnection;
-import com.company.database.WarehouseTableGateway;
-import com.company.database.ProductTableGateway;
+import src.com.company.database.DBConnection;
+import src.com.company.database.WarehouseTableGateway;
+import src.com.company.database.ProductTableGateway;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,7 +29,6 @@ public class Model {
 
 
     private Model() {
-
         try {
             Connection conn = DBConnection.getInstance();
             this.sGateway = new ProductTableGateway(conn);
@@ -40,8 +39,6 @@ public class Model {
         } catch (SQLException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }
 
     public List viewProduct() {
@@ -49,14 +46,19 @@ public class Model {
         return productList;
     }
 
+    public List viewWarehouse() {
+        this.warehouseList = this.mGateway.getWarehouse();
+        return warehouseList;
+    }
+
     //gets a warehouse using an ID from the database then gets all that warehouse's products
-    public Warehouse viewWarehouse(int id){
+    public Warehouse viewWarehouse(int id) {
         Warehouse m = mGateway.getWarehouse(id);
         m.setProductList(this.sGateway.getProductByWarehouseId(id));
         return m;
     }
 
-    public boolean createWarehouse(Warehouse m){
+    public boolean createWarehouse(Warehouse m) {
         //boolean inserted = mGateway.insertWarehouse(m);
         //return inserted;
         return (mGateway.insertWarehouse(m));
@@ -66,6 +68,13 @@ public class Model {
         int createdId = this.sGateway.createProduct(Product);
         return createdId;
     }
+
+    public boolean editProduct(int id, double price) {
+        return (sGateway.editProduct(id, price));
+    }
+
+    public boolean deleteProduct(int id)
+    {
+        return (sGateway.deleteProduct(id));
+    }
 }
-
-

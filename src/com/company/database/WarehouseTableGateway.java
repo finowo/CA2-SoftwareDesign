@@ -9,14 +9,44 @@ public class WarehouseTableGateway {
 
     private static final String TABLE_NAME = "manager";
     private static final String COLUMN_ID = "id";
-    private static final String COLUMN_NAME = "location";
-    private static final String COLUMN_OFFICE = "orderNumber";
+    private static final String COLUMN_LOCATION = "location";
+    private static final String COLUMN_ORDER_NUMBER = "orderNumber";
 
 
     private Connection mConnection;
 
     public WarehouseTableGateway(Connection connection) {
         mConnection = connection;
+    }
+
+
+    public List<Warehouse> getWarehouse()  {
+        //the SQL query to execute
+        String query;
+        //the java.sql.Statement object used to execute the SQL query
+        Statement stmt;
+        //the java.sql.ResultSet representing the result of SQL query
+        ResultSet rs;
+        //the java.util.List containing the Programmer objects created for each row
+        List<warehouse> warehouseList;
+
+        String location;
+        int id, orderNumber;
+
+        Warehouse warehouse;
+
+        query = "SELECT * FROM " + TABLE_NAME ;
+
+        warehouseList = new ArrayList<Warehouse>();
+
+        try {
+            stmt = this.mConnection.createStatement();
+            rs = stmt.executeQuery(query);
+        }
+        catch(SQLException ex){
+            System.out.println("WarehouseTableGateway Line 56: " + ex);
+        }
+        return warehouseList;
     }
 
     // Get Manager by ID

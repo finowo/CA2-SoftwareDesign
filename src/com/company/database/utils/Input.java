@@ -24,19 +24,59 @@ public class Input {
         name = keyboard.nextLine();
 
         System.out.print("Enter brand: ");
-        email = keyboard.nextLine();
+        brand = keyboard.nextLine();
 
         System.out.print("Enter price: ");
-        mobile = keyboard.nextLine();
+        price = keyboard.nextLine();
 
         System.out.print("Enter heal toe offset: ");
-        skills = keyboard.nextLine();
+        healToeOffset = keyboard.nextLine();
 
         System.out.print("Enter weight: ");
-        skills = keyboard.nextLine();
+        weight = keyboard.nextLine();
 
         System.out.print("Enter profit: ");
-        skills = keyboard.nextLine();
+        profit = keyboard.nextLine();
+        keyboard.nextLine();
+
+        //Asking for the warehouse ID - this needs to exist in the db
+        System.out.print("Enter Warehouse ID : ");
+        mId = keyboard.nextInt();
+        keyboard.nextLine();
+
+        // Create the Runner object r
+        Runner r =
+                new Runner(name, brand, price, healToeOffset, weight, profit, wId);
+        return r;
+    }
+
+    public static Runner readRunningWatch() {
+
+        String name, brand, os;
+        double price, batteryLife, profit;
+        int wId;
+
+        Scanner keyboard = new Scanner(System.in);
+
+        // ask the user for all the programmer data except the ID - ID is automatically
+        // created in the database when you are creating something for the first time
+        System.out.print("Enter name: ");
+        name = keyboard.nextLine();
+
+        System.out.print("Enter brand: ");
+        brand = keyboard.nextLine();
+
+        System.out.print("Enter price: ");
+        price = keyboard.nextLine();
+
+        System.out.print("Enter operating system: ");
+        os = keyboard.nextLine();
+
+        System.out.print("Enter battery life: ");
+        batteryLife = keyboard.nextLine();
+
+        System.out.print("Enter profit: ");
+        profit = keyboard.nextLine();
         keyboard.nextLine();
 
         //Asking for the warehouse ID - this needs to exist in the db
@@ -46,9 +86,9 @@ public class Input {
 
 
         // Create the Runner object r
-        Runner r =
-                new Runner(name, brand, price, healToeOffset, weight, profit, wId);
-        return r;
+        RunningWatch rw =
+                new RunningWatch(name, brand, price, os, batteryLife, profit, wId);
+        return rw;
     }
 
     public static Warehouse readWarehouse() {

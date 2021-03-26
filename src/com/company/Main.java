@@ -1,9 +1,11 @@
-package com.company;
+package src.com.company.database;
 
-import com.company.utils.Input;
+import src.Model;
+import src.Product;
+import src.Warehouse;
+import src.com.company.database.utils.Input;
 import com.mysql.cj.log.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -56,10 +58,12 @@ public class Main {
                 }
 
                 case 3: {
+                    editProduct();
                     break;
                 }
 
                 case 4: {
+                    deleteProduct();
                     break;
                 }
 
@@ -68,8 +72,8 @@ public class Main {
                     break;
                 }
                 case 6: {
-                    //viewAllManagers();
-                    //break;
+                    viewWarehouse();
+                    break;
                 }
                 case 7: {
                     createNewWarehouse();
@@ -77,7 +81,7 @@ public class Main {
                 }
 
                 case 8: {
-                    System.out.println("Not implemented yet.");
+                    System.out.println("idfk how im supposed to do this");
                     break;
                 }
 
@@ -100,20 +104,48 @@ public class Main {
         switch (choice){
             case 1:
             {
-                product = Input.readProduct();
+
+                product = Input.readRunner();
                 int generatedId = model.createProduct(product);
                 System.out.println("Product created with ID "+ generatedId);
                 break;
             }
             case 2:
             {
-                //Do something similar for second subclass
+                product = Input.readRunningWatch();
+                int generatedId = model.createProduct(product);
+                System.out.println("Product created with ID "+ generatedId);
                 break;
             }
 
 
         }
         model.createProduct(product);
+    }
+
+
+    private static void editProduct() {
+        System.out.print("Enter the ID of the Product to update:");
+        int id = Integer.parseInt(keyboard.nextLine());
+        System.out.print("Enter the new price of the product:");
+        int price = Integer.parseInt(keyboard.nextLine());
+        if (model.editProduct(id, price)) {
+            System.out.println("\nProduct updated: Please note, that this only changes the price at the moment.");
+        }
+        else {
+            System.out.println("\nProduct not updated, check your database to see if a Product with this ID actually exists");
+        }
+    }
+
+    private static void deleteProduct() {
+        System.out.print("Enter the ID of the Product to delete:");
+        int id = Integer.parseInt(keyboard.nextLine());
+        if (model.deleteProduct(id)) {
+            System.out.println("\nProduct deleted");
+        }
+        else {
+            System.out.println("\nProduct not deleted, check your database to see if a Product with this ID actually exists");
+        }
     }
 
     private static void createNewWarehouse() {
@@ -145,8 +177,15 @@ public class Main {
 
     private static void viewProduct() {
         List<Product> productList = model.viewProduct();
-        for (Product Product : ProductList) {
+        for (Product product : ProductList) {
             System.out.println("Name: " + Product.toString());
+        }
+    }
+
+    private static void viewWarehouse() {
+        List<Warehouse> warehouseList = model.viewWarehouse();
+        for (Warehouse warehouse : WarehouseList) {
+            System.out.println("Name: " + Warehouse.toString());
         }
     }
 }
